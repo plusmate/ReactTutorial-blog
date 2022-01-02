@@ -8,10 +8,9 @@ function App() {
   let [postNumber, changingPostNumber] = useState(0)
   let [like, changingLike] = useState(0)
   // let [likeNumber, changingLikeNumber] = useState([postLikeNumber1=0, postLikeNumber2=0, postLikeNumber3=0])
-  //likeNumber[i]
   let [modal, changingModal] = useState(false)
-  // let [addressModal, changingAddressModal] = useState(false)
   let [inputValue, changingInputValue] = useState('') //input에 입력한 데이터 저장
+
 
   /* state의 변수들은 그냥 데이터 변경이 불가능 */
   // function likeButton() {
@@ -47,8 +46,9 @@ function App() {
     changingModal(!modal)
   }
 
-  function addressModalFunction() {
-    changingAddressModal(!addressModal)
+  function inputValueFunction() {
+    // inputValue -> currentTitle
+    currentTitle.push(inputValue)
   }
 
   // function Post() {
@@ -82,11 +82,11 @@ function App() {
         currentTitle.map( function(titleData, i){
           return(
             <div className="list" key={i}>
-            <h3 onClick={() => {changingPostNumber(i)}}>{titleData} </h3>
-            <span onClick={ changingLikeFunction }>👍</span> {like}
-            <p>?월 ?일 발행</p>
-            <hr />
-          </div>
+              <h3 onClick={() => {changingPostNumber(i)}}>{titleData} </h3>
+              <span onClick={ changingLikeFunction }>👍</span> {like}
+              <p>?월 ?일 발행</p>
+              <hr />
+            </div>
           )
         })
       }
@@ -95,10 +95,16 @@ function App() {
       {/* e.target.value ) 해당 태그에 입력된 값 */}
       {/* <input onChange={ (e) => { changingInputValue(e.target.value)} }/> */}
 
-      <button onClick={modalFunction}>포스트</button>
+      <div>
+        <input className='publish' onChange={ (e) => { changingInputValue(e.target.value)} }/>
+        <button onClick={ inputValueFunction }>제목 업로드</button>
+      </div>
+
+      <button onClick={modalFunction}>글 보기</button>
       {/* 자식component에 props전달 ) <자식component 작명={state명}/>*/}
       {modal === true ? <Modal currentTitle={currentTitle} postNumber={postNumber}/> : null} 
     </div>
+
 
     
   );
@@ -113,13 +119,5 @@ function Modal(props){
       </div>
   )
 }
-
-// function Address() {
-//   return(
-//     <div className='modal'>
-//       <p>ㅁㅁ시ㅁㅁ구ㅁㅁ동ㅁㅁ로ㅇㅇㅇ</p>
-//     </div>
-//   )
-// }
 
 export default App;
