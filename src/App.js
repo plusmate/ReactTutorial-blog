@@ -47,8 +47,10 @@ function App() {
   }
 
   function inputValueFunction() {
-    // inputValue -> currentTitle
-    currentTitle.push(inputValue)
+    // currentTitle.push(inputValue)
+    var currentTitleArray = [...currentTitle] //unshift를 하기 전에 deepCopy 잊지말기!
+    currentTitleArray.unshift(inputValue) //.unshift(...) ) 배열의 맨 앞에 ...데이터를 추가
+    changingTitle( currentTitleArray )
   }
 
   // function Post() {
@@ -95,9 +97,9 @@ function App() {
       {/* e.target.value ) 해당 태그에 입력된 값 */}
       {/* <input onChange={ (e) => { changingInputValue(e.target.value)} }/> */}
 
-      <div>
-        <input className='publish' onChange={ (e) => { changingInputValue(e.target.value)} }/>
-        <button onClick={ inputValueFunction }>제목 업로드</button>
+      <div className='publish'>
+        <input onChange={ (e) => { changingInputValue(e.target.value)} }/>
+        <button onClick={ inputValueFunction }>업로드</button>
       </div>
 
       <button onClick={modalFunction}>글 보기</button>
