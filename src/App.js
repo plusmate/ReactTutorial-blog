@@ -11,6 +11,7 @@ function App() {
   //likeNumber[i]
   let [modal, changingModal] = useState(false)
   // let [addressModal, changingAddressModal] = useState(false)
+  let [inputValue, changingInputValue] = useState('') //input에 입력한 데이터 저장
 
   /* state의 변수들은 그냥 데이터 변경이 불가능 */
   // function likeButton() {
@@ -80,7 +81,7 @@ function App() {
       {
         currentTitle.map( function(titleData, i){
           return(
-            <div className="list">
+            <div className="list" key={i}>
             <h3 onClick={() => {changingPostNumber(i)}}>{titleData} </h3>
             <span onClick={ changingLikeFunction }>👍</span> {like}
             <p>?월 ?일 발행</p>
@@ -89,6 +90,10 @@ function App() {
           )
         })
       }
+
+      {/* 이벤트 핸들러 onChange ) 뭔가 입력될 때 안의 함수가 실행됨 */}
+      {/* e.target.value ) 해당 태그에 입력된 값 */}
+      {/* <input onChange={ (e) => { changingInputValue(e.target.value)} }/> */}
 
       <button onClick={modalFunction}>포스트</button>
       {/* 자식component에 props전달 ) <자식component 작명={state명}/>*/}
