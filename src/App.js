@@ -56,7 +56,7 @@ function App() {
   // function Post() {
   //   var postArray = []
 
-  //   for (var i = 0; i<3; i++){
+  //   for (let i = 0; i<3; i++){
   //     postArray.push(
   //       <div className="list">
   //         <h3 onClick={ () => changingPosts(i)}>{currentTitle[i]} </h3>
@@ -98,6 +98,7 @@ function App() {
       {/* <input onChange={ (e) => { changingInputValue(e.target.value)} }/> */}
 
       <div className='publish'>
+        <Profile/>
         <input onChange={ (e) => { changingInputValue(e.target.value)} }/>
         <button onClick={ inputValueFunction }>업로드</button>
       </div>
@@ -106,9 +107,6 @@ function App() {
       {/* 자식component에 props전달 ) <자식component 작명={state명}/>*/}
       {modal === true ? <Modal currentTitle={currentTitle} postNumber={postNumber}/> : null} 
     </div>
-
-
-    
   );
 }
 
@@ -120,6 +118,24 @@ function Modal(props){
         <p>상세내용</p>
       </div>
   )
+}
+
+
+// 구버전 리액트 
+class Profile extends React.Component{
+  constructor(){
+    super()
+    this.state = { name: 'sejin', age: 30}
+  }
+
+  render(){
+    return(
+      <>
+        <h3>프로필입니다.</h3>
+        <p>저는 {this.state.name}</p>
+      </>
+    )
+  }
 }
 
 export default App;
